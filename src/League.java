@@ -4,12 +4,15 @@
 
 // I M P O R T S
 import com.google.gson.GsonBuilder;
+import java.util.ArrayList;
 
 // C L A S S  D E F I N I T I O N
 public class League {
     // A T T R I B U T E S
     private String name;
     private int id;
+    private int week;
+    private ArrayList<Team> teams;
 
     // C O N S T R U C T O R S
     public League()
@@ -17,6 +20,8 @@ public class League {
         // Empty
         this.name = "Unknown";
         this.id = -1;
+        this.week = 0;
+        teams = new ArrayList<Team>();
     }
     public League(String name, int id)
     {
@@ -43,5 +48,6 @@ public class League {
     {
         return new GsonBuilder().create().toJson(this);
     }
+
     // T E S T  M E T H O D S
 }

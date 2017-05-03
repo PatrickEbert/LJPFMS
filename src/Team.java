@@ -37,7 +37,7 @@ public class Team {
 
     public int getPoints(){return this.points;}
     public int getGoalsFor(){return this.goalsFor;}
-    public int getGoalsAgainst(){return this.getGoalsAgainst();}
+    public int getGoalsAgainst(){return this.goalsAgainst;}
     public int getGoalsDiff(){return this.getGoalsFor() - this.getGoalsAgainst();}
 
     // O V E R R I D E S
