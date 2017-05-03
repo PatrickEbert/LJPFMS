@@ -51,6 +51,5 @@ public class League {
     {
         return new GsonBuilder().create().toJson(this);
     }
-
     // T E S T  M E T H O D S
 }
