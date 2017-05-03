@@ -14,7 +14,8 @@ public class Main {
         ArrayList<Team>teams;
         System.out.println("This is the beginning...");
         teams = loadTeams();
-        League l = new League("1. Bundesliga",1);
+        League l = loadLeague(teams);
+        System.out.println(l.toJSON());
     }
 
     // M E T H O D E S
@@ -40,7 +41,29 @@ public class Main {
 
     public static League loadLeague(ArrayList<Team> teams)
     {
-        League retLeague = new League("1. Bundesliga",1);
+        League retLeague = new League();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("data/_Leagues.csv"));
+            String line = br.readLine();
+            retLeague = new League(line.split(";")[1],Integer.parseInt(line.split(";")[0]));
+            String[] teamIds = line.split(";")[2].split("/");
+            for(int i = 0; i < teamIds.length; i++)
+            {
+                for (Team t : teams)
+                {
+                    if(Integer.parseInt(teamIds[i])==t.getId())
+                    {
+                        retLeague.addTeam(t);
+                        teams.remove(t);
+                        break;
+                    }
+
+                }
+            }
+        }catch(Exception ex)
+        {
+            Misc.log("Error at Main.loadLeague(): " + ex.getMessage());
+        }
         return retLeague;
     }
 }

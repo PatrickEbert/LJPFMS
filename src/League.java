@@ -30,11 +30,14 @@ public class League {
         this.id = id;
     }
 
-    // S E T S  A N D  G E T S
+    // S E T S  A N D  G E T S A N D  A D D S
     public void setName(String name){this.name = name;}
     public String getName(){return this.name;}
     public void setId(int id){this.id = id;}
     public int getId(){return id;}
+    public void addTeam(Team team){teams.add(team);}
+    public ArrayList<Team> getTeams(){return teams;}
+    public Team getTeam(int id){for(Team t : teams){if(t.getId()==id){return t;}}return null;}
 
     // O V E R R I D E S
     @Override
