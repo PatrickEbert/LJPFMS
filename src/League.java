@@ -1,7 +1,9 @@
 /**
  * Created by pebert on 5/2/2017.
  */
+
 // I M P O R T S
+import com.google.gson.GsonBuilder;
 
 // C L A S S  D E F I N I T I O N
 public class League {
@@ -37,5 +39,9 @@ public class League {
     }
 
     // M E T H O D E S
+    public String toJSON()
+    {
+        return new GsonBuilder().create().toJson(this);
+    }
     // T E S T  M E T H O D S
 }

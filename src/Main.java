@@ -8,6 +8,6 @@ public class Main {
     {
         System.out.println("This is the beginning...");
         League l = new League("1. Bundesliga",1);
-        System.out.println(l);
+        System.out.println(l.toJSON());
     }
 }
