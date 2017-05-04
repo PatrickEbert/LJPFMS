@@ -5,6 +5,8 @@
 // I M P O R T S
 import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 // C L A S S  D E F I N I T I O N
 public class League {
@@ -14,6 +16,7 @@ public class League {
     private int week;
     private int numOfTeams;
     private ArrayList<Team> teams;
+    private Match[][]schedule;
 
     // C O N S T R U C T O R S
     public League()
@@ -35,7 +38,7 @@ public class League {
         createSchedule();
     }
 
-    // S E T S  A N D  G E T S A N D  A D D S
+    // S E T S  A N D  G E T S  A N D  A D D S
     public void setName(String name){this.name = name;}
     public String getName(){return this.name;}
     public void setId(int id){this.id = id;}
@@ -64,6 +67,52 @@ public class League {
             return;
 
         // LoadLines
+        try
+        {
+            BufferedReader br = new BufferedReader(new FileReader("data/_Schedule" + this.numOfTeams + ".csv"));
+            String line = "";
+            boolean firstLine = true;
+            while((line=br.readLine())!=null)
+            {
+                if(firstLine)
+                {
+                    this.schedule = new Match[Integer.parseInt(line.split(";")[3])][Integer.parseInt(line.split(";")[4])];
+                    firstLine = false;
+                }
+                schedule[Integer.parseInt(line.split(";")[0])-1][Integer.parseInt(line.split(";")[1])-1] = new Match(getTeam(Integer.parseInt(line.split(";")[2].split("-")[0])),getTeam(Integer.parseInt(line.split(";")[2].split("-")[1])));
+            }
+        }catch(Exception ex)
+        {
+            Misc.log("Error in League.createSchedule(): " + ex.getLocalizedMessage());
+        }
+    }
+
+    public void proceedWeek()
+    {
+        if(week >= schedule.length)
+            return;
+
+        for(int i = 0; i < schedule[week].length;i++)
+            schedule[week][i].play();
+
+        week++;
+        teams.sort(new TeamTableComparator());
+    }
+
+    public void printTable()
+    {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+        System.out.println("-------------------------------------------------------");
+        System.out.println(this.name);
+        System.out.println(this.week + ". Matchday");
+        int p = 0;
+        for(Team t : teams)
+        {
+            p++;
+            System.out.println(p + " " + t);
+        }
+        System.out.println("-------------------------------------------------------");
     }
     // T E S T  M E T H O D S
 }

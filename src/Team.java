@@ -48,5 +48,24 @@ public class Team {
     }
 
     // M E T H O D S
+    public void win(int goalsFor, int goalsAgainst)
+    {
+        this.points += 3;
+        this.goalsFor += goalsFor;
+        this.goalsAgainst += goalsAgainst;
+    }
+
+    public void draw(int goals)
+    {
+        this.points++;
+        this.goalsFor += goals;
+        this.goalsAgainst += goals;
+    }
+
+    public void loose(int goalsFor, int goalsAgainst)
+    {
+        this.goalsFor += goalsFor;
+        this.goalsAgainst += goalsAgainst;
+    }
     // T E S T  M E T H O D S
 }

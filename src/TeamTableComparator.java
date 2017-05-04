@@ -10,12 +10,12 @@ public class TeamTableComparator implements Comparator<Team>
     @Override
     public int compare(Team t1, Team t2)
     {
-        if((t1.getPoints()-t2.getPoints())!=0)
-            return t1.getPoints()-t2.getPoints();
+        if((t2.getPoints()-t1.getPoints())!=0)
+            return t2.getPoints()-t1.getPoints();
 
-        if((t1.getGoalsDiff()-t2.getGoalsDiff())!=0)
-            return t1.getGoalsDiff()-t2.getGoalsDiff();
+        if((t2.getGoalsDiff()-t1.getGoalsDiff())!=0)
+            return t2.getGoalsDiff()-t1.getGoalsDiff();
 
-        return t1.getGoalsFor()-t2.getGoalsFor();
+        return t2.getGoalsFor()-t1.getGoalsFor();
     }
 }

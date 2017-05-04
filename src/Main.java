@@ -15,7 +15,15 @@ public class Main {
         System.out.println("This is the beginning...");
         teams = loadTeams();
         League l = loadLeague(teams);
-        System.out.println(l.toJSON());
+        for(int i = 0; i < 34; i++)
+        {
+            l.proceedWeek();
+            l.printTable();
+            System.out.println("next week...");
+            try {
+                System.in.read();
+            }catch(Exception ex){}
+        }
     }
 
     // M E T H O D E S
