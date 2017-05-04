@@ -12,6 +12,7 @@ public class League {
     private String name;
     private int id;
     private int week;
+    private int numOfTeams;
     private ArrayList<Team> teams;
 
     // C O N S T R U C T O R S
@@ -21,13 +22,17 @@ public class League {
         this.name = "Unknown";
         this.id = -1;
         this.week = 0;
+        this.numOfTeams = 18;
         teams = new ArrayList<Team>();
     }
-    public League(String name, int id)
+    public League(String name, int id, int numOfTeams, ArrayList<Team>teams)
     {
         this();
         this.name = name;
         this.id = id;
+        this.numOfTeams = numOfTeams;
+        this.teams = teams;
+        createSchedule();
     }
 
     // S E T S  A N D  G E T S A N D  A D D S
@@ -50,6 +55,15 @@ public class League {
     public String toJSON()
     {
         return new GsonBuilder().create().toJson(this);
+    }
+
+    public void createSchedule()
+    {
+        // if it is not week zero, don't create a schedule
+        if(this.week !=0)
+            return;
+
+        // LoadLines
     }
     // T E S T  M E T H O D S
 }

@@ -45,7 +45,7 @@ public class Main {
         try {
             BufferedReader br = new BufferedReader(new FileReader("data/_Leagues.csv"));
             String line = br.readLine();
-            retLeague = new League(line.split(";")[1],Integer.parseInt(line.split(";")[0]));
+            ArrayList<Team>selectedTeams = new ArrayList<Team>();
             String[] teamIds = line.split(";")[2].split("/");
             for(int i = 0; i < teamIds.length; i++)
             {
@@ -53,13 +53,14 @@ public class Main {
                 {
                     if(Integer.parseInt(teamIds[i])==t.getId())
                     {
-                        retLeague.addTeam(t);
+                        selectedTeams.add(t);
                         teams.remove(t);
                         break;
                     }
 
                 }
             }
+            retLeague = new League(line.split(";")[1],Integer.parseInt(line.split(";")[0]),Integer.parseInt(line.split(";")[3]),selectedTeams);
         }catch(Exception ex)
         {
             Misc.log("Error at Main.loadLeague(): " + ex.getMessage());
