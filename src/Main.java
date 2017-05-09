@@ -15,14 +15,16 @@ public class Main {
         System.out.println("This is the beginning...");
         teams = loadTeams();
         League l = loadLeague(teams);
-        for(int i = 0; i < 34; i++)
+        while(true)
         {
-            l.proceedWeek();
+            int status = l.proceedWeek();
             l.printTable();
             System.out.println("next week...");
             try {
                 System.in.read();
             }catch(Exception ex){}
+            if(status == League.END_OF_SEASON)
+                teams = l.proceedEndOfSeason(teams);
         }
     }
 

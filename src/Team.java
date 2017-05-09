@@ -11,6 +11,8 @@ public class Team {
     private int points;
     private int goalsFor;
     private int goalsAgainst;
+    private boolean champion;
+    private boolean newby;
 
     // C O N S T R U C T O R S
     public Team()
@@ -20,6 +22,8 @@ public class Team {
         this.points = 0;
         this.goalsFor = 0;
         this.goalsAgainst = 0;
+        this.champion = false;
+        this.newby = false;
     }
 
     public Team(String name, int id)
@@ -39,12 +43,22 @@ public class Team {
     public int getGoalsFor(){return this.goalsFor;}
     public int getGoalsAgainst(){return this.goalsAgainst;}
     public int getGoalsDiff(){return this.getGoalsFor() - this.getGoalsAgainst();}
+    public void setChampion(boolean champion){this.champion = champion;}
+    public boolean getChampion(){return this.champion;}
+    public void setNewby(boolean newby){this.newby = newby;}
+    public boolean getNewby(){return this.newby;}
 
     // O V E R R I D E S
     @Override
     public String toString()
     {
-        return this.name + "|" + this.points + "|" + this.goalsFor + "|" + this.goalsAgainst + "|" + this.getGoalsDiff();
+        String retString = this.name;
+        if(champion)
+            retString += "(C)";
+        if(newby)
+            retString += "(N)";
+        retString += "|" + this.points + "|" + this.goalsFor + "|" + this.goalsAgainst + "|" + this.getGoalsDiff();
+        return retString;
     }
 
     // M E T H O D S
@@ -67,5 +81,15 @@ public class Team {
         this.goalsFor += goalsFor;
         this.goalsAgainst += goalsAgainst;
     }
+
+    public void clearSeason()
+    {
+        this.setChampion(false);
+        this.setNewby(false);
+        this.points = 0;
+        this.goalsFor = 0;
+        this.goalsAgainst = 0;
+    }
+
     // T E S T  M E T H O D S
 }
