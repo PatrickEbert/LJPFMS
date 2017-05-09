@@ -47,10 +47,11 @@ public class League {
     public void setName(String name){this.name = name;}
     public String getName(){return this.name;}
     public void setId(int id){this.id = id;}
-    public int getId(){return id;}
-    public void addTeam(Team team){teams.add(team);}
-    public ArrayList<Team> getTeams(){return teams;}
-    public Team getTeam(int id){for(Team t : teams){if(t.getId()==id){return t;}}return null;}
+    public int getId(){return this.id;}
+    public void addTeam(Team team){this.teams.add(team);}
+    public ArrayList<Team> getTeams(){return this.teams;}
+    public Team getTeam(int id){for(Team t : this.teams){if(t.getId()==id){return t;}}return null;}
+    public Team getTeamByIndex(int index){return this.teams.get(index);}
 
     // O V E R R I D E S
     @Override
@@ -84,7 +85,7 @@ public class League {
                     this.schedule = new Match[Integer.parseInt(line.split(";")[3])][Integer.parseInt(line.split(";")[4])];
                     firstLine = false;
                 }
-                schedule[Integer.parseInt(line.split(";")[0])-1][Integer.parseInt(line.split(";")[1])-1] = new Match(getTeam(Integer.parseInt(line.split(";")[2].split("-")[0])),getTeam(Integer.parseInt(line.split(";")[2].split("-")[1])));
+                schedule[Integer.parseInt(line.split(";")[0])-1][Integer.parseInt(line.split(";")[1])-1] = new Match(getTeamByIndex(Integer.parseInt(line.split(";")[2].split("-")[0])-1),getTeamByIndex(Integer.parseInt(line.split(";")[2].split("-")[1])-1));
             }
         }catch(Exception ex)
         {
@@ -94,17 +95,17 @@ public class League {
 
     public int proceedWeek()
     {
-        if(week == 0)
+        if(this.week == 0)
             createSchedule();
-        
-        if(week >= schedule.length)
+
+        if(this.week >= this.schedule.length)
             return League.END_OF_SEASON;
 
-        for(int i = 0; i < schedule[week].length;i++)
-            schedule[week][i].play();
+        for(int i = 0; i < this.schedule[this.week].length;i++)
+            this.schedule[this.week][i].play();
 
-        week++;
-        teams.sort(new TeamTableComparator());
+        this.week++;
+        this.teams.sort(new TeamTableComparator());
 
         return 0;
     }

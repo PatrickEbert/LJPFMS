@@ -37,22 +37,20 @@ public class Match
     // M E T H O D E S
     public void play()
     {
-        this.homeGoals = new Random().nextInt(5);
-        this.awayGoals = new Random().nextInt(5);
-        this.minute = 90;
-        if(homeGoals > awayGoals)
-        {
-            home.win(homeGoals,awayGoals);
-            away.loose(awayGoals,homeGoals);
-        }else if(homeGoals < awayGoals)
-        {
-            home.loose(homeGoals,awayGoals);
-            away.win(awayGoals,homeGoals);
-        }
-        else
-        {
-            home.draw(homeGoals);
-            away.draw(awayGoals);
-        }
+        try {
+            this.homeGoals = new Random().nextInt(5);
+            this.awayGoals = new Random().nextInt(5);
+            this.minute = 90;
+            if (homeGoals > awayGoals) {
+                home.win(homeGoals, awayGoals);
+                away.loose(awayGoals, homeGoals);
+            } else if (homeGoals < awayGoals) {
+                home.loose(homeGoals, awayGoals);
+                away.win(awayGoals, homeGoals);
+            } else {
+                home.draw(homeGoals);
+                away.draw(awayGoals);
+            }
+        }catch(Exception ex){Misc.log(ex.getMessage());}
     }
 }

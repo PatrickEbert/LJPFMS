@@ -2,6 +2,7 @@
  * Created by pebert on 5/2/2017.
  */
 // I M P O R T S
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -11,6 +12,7 @@ public class Main {
     // M A I N  M E T H O D E
     public static void main(String [] args)
     {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         ArrayList<Team>teams;
         System.out.println("This is the beginning...");
         teams = loadTeams();
@@ -21,7 +23,7 @@ public class Main {
             l.printTable();
             System.out.println("next week...");
             try {
-                System.in.read();
+                br.readLine();
             }catch(Exception ex){}
             if(status == League.END_OF_SEASON)
                 teams = l.proceedEndOfSeason(teams);
